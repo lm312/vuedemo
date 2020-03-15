@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+          当前时间：{{nowDate | dataFmt('yyyy-MM-dd HH:mm:ss')}}
+          <p>{{ message }}</p>
+          <input type="text" id='msg' onchange="msgclick()" v-model="message"/>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        // vue2.0后，删除了所有内置的过滤器，都需要自己定义
+        Vue.filter('dataFmt',function(data,type){
+          that = new Date(data)
+          var o = {
+              "M+": that.getMonth() + 1, //月份
+              "d+": that.getDate(), //日
+              "h+": that.getHours() % 12 == 0 ? 12 : that.getHours() % 12, //小时
+              "H+": that.getHours(), //小时
+              "m+": that.getMinutes(), //分
+              "s+": that.getSeconds(), //秒
+              "q+": Math.floor((that.getMonth() + 3) / 3), //季度
+              "S": that.getMilliseconds() //毫秒
+          };
+          var week = { "0": "\u65e5", "1": "\u4e00", "2": "\u4e8c", "3": "\u4e09", "4": "\u56db", "5": "\u4e94", "6": "\u516d" };
+          if (/(y+)/.test(type)) { type = type.replace(RegExp.$1, (that.getFullYear() + "").substr(4 - RegExp.$1.length)); }
+          if (/(E+)/.test(type)) { type = type.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "\u661f\u671f" : "\u5468") : "") + '周' + week[that.getDay() + ""]); }
+          for (var k in o) {
+              if (new RegExp("(" + k + ")").test(type)) { type = type.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length))); }
+          }
+          return type;
+        })
+
+
+
+        //一个vue的实例
+        var vm=new Vue({
+            el: '#app',
+            data: {
+              nowDate:new Date(),
+              message:"hello"
+            },
+
+            //生命周期函数：动态显示时间，要不然时间是死的，刷新页面才会更新
+            mounted: function () {
+                var that=this;
+                setInterval(function () {
+                    that.nowDate=new Date();
+                },1000)
+            },
+             
+        })
+         function msgclick() {
+                var that=this;
+                console.log(that.message);
+               // that.message=document.getElementById("msg").value;
+            }
+    </script>
+  </body>
+</html>
