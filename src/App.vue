@@ -3,6 +3,7 @@
     <img src="./assets/logo.png">
     <router-view/>
      count: {{ $store.state.count }}
+
   </div>
 </template>
 
