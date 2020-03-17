@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <blog-post title='msg'/>
     <h2>Essential Links</h2>
     <ul>
       <li>

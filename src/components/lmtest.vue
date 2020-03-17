@@ -1,9 +1,10 @@
 <template>
-  <div class="hello">
+  <div id="lmtest" class="hello">
     <h1>{{ msg }}</h1>
      <h1>{{ num+1 }}</h1>
       <h1>{{ reverse }}</h1>
         <h1>{{ watch1 }}</h1>
+           count: {{ $store.state.count }}
    <input v-show="show" value="vshow">
     <input v-if="show" value="v-if">
       <input v-model="msg">
@@ -12,33 +13,32 @@
       </ul>
       <button v-bind:disabled="isButtonDisabled">Button</button>
       <button v-on:click="greet">Greet</button>
+         <blog-post title="My journey with Vue11"/>
   </div>
-  
 </template>
 
 <script>
+new Vue({ el: '#lmtest'
+})
 export default {
   name: 'lmtest',
   data () {
     return {
       msg: 'lmtestvue',
-      show: true ,
+      show: true,
       items: [
-      {msg:"1"},
-      {msg:"2"}
+        {msg: '1'},
+        {msg: '2'}
       ],
-      num:2,
-       watch1:2,
+      num: 2,
+      watch1: 2,
       isButtonDisabled: true
-      }
-    },
-      computed: {
+    }
+  },
+  computed: {
     // 计算属性的 getter
-    reverse: ()=>"1"
-      //()=>  this.msg.split('').reverse().join('') 
-         // `this` 指向 vm 实例 reverse: ()=>"1"
-  }
-  ,
+    reverse: () => '1'
+  },
   watch: {
     msg: function (val) {
       this.watch1 = val + '222'
