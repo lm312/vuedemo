@@ -1,23 +1,28 @@
 <template>
   <div id="lmtest1">
-   <App></App>
  
    <h1>lmtest1</h1>
-      <App></App>
-      <h3>  {{ title }}</h3>   
+    <HelloWorld/>
+     <lmtest/>
   </div>
 </template>
 
 <script>
+import HelloWorld from './HelloWorld.vue'
+import lmtest from './lmtest.vue'
 export default {
   name: 'lmtest1',
-   el: '#lmtest1',
-  props: ['title']
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  components:{
+    HelloWorld,
+    lmtest
+  }
 }
-Vue.component('blog-post', {
-  props: ['title'],
-  template: '<h3>{{ title }}</h3>'
-})
+
 </script>
 
 <style>

@@ -13,7 +13,7 @@
       </ul>
       <button v-bind:disabled="isButtonDisabled">Button</button>
       <button v-on:click="greet">Greet</button>
-         <blog-post title="My journey with Vue11"/>
+        <button-counter> </button-counter>
   </div>
 </template>
 
